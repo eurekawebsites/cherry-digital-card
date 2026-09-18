@@ -149,55 +149,61 @@
 
     .content { padding: 24px; }
 
-    .intro {
-      margin: 0;
+    .section-title {
+      margin: 0 0 14px;
       font-family: var(--serif);
-      font-size: 1.38rem;
-      line-height: 1.35;
-      letter-spacing: -.018em;
-    }
-
-    .handle {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: .9rem;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 20px;
-      padding: 15px 0;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .stat {
-      min-width: 0;
-      text-align: center;
-    }
-
-    .stat + .stat { border-left: 1px solid var(--line); }
-
-    .stat strong {
-      display: block;
-      font-family: var(--serif);
-      font-size: 1.28rem;
+      font-size: 1.45rem;
       font-weight: 400;
-      line-height: 1;
+      line-height: 1.2;
+      letter-spacing: -.02em;
     }
 
-    .stat span {
-      display: block;
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: .68rem;
-      letter-spacing: .06em;
+    .details {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: #fff;
+    }
+
+    .detail-group + .detail-group {
+      border-top: 6px solid var(--paper);
+    }
+
+    .detail-heading {
+      margin: 0;
+      padding: 12px 15px 8px;
+      color: var(--cherry);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .1em;
       text-transform: uppercase;
+    }
+
+    .detail-row {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 12px;
+      align-items: baseline;
+      padding: 11px 15px;
+      border-top: 1px solid var(--line);
+    }
+
+    .detail-label {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 700;
+    }
+
+    .detail-value {
+      min-width: 0;
+      color: var(--ink);
+      font-size: .88rem;
+      overflow-wrap: anywhere;
+    }
+
+    .placeholder {
+      color: #9b8b8e;
+      font-style: italic;
     }
 
     .verified {
@@ -353,16 +359,44 @@
       </section>
 
       <section class="content">
-        <p class="intro">Lifestyle, autenticidad y una comunidad que conecta con su estilo.</p>
-        <div class="handle">
-          <span>@cherryvenegass</span>
-          <span class="verified" aria-label="Cuenta verificada">✓</span>
-        </div>
+        <h2 class="section-title">Información</h2>
 
-        <div class="stats" aria-label="Perfil">
-          <div class="stat"><strong>80K+</strong><span>Comunidad</span></div>
-          <div class="stat"><strong>MX</strong><span>Origen</span></div>
-          <div class="stat"><strong>21</strong><span>Edad</span></div>
+        <div class="details" aria-label="Información de contacto y pagos">
+          <div class="detail-group">
+            <p class="detail-heading">Contacto</p>
+            <div class="detail-row">
+              <span class="detail-label">Nombre</span>
+              <span class="detail-value placeholder">Nombre completo</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Instagram</span>
+              <span class="detail-value placeholder">@usuario</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">WhatsApp</span>
+              <span class="detail-value placeholder">+52 00 0000 0000</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Correo</span>
+              <span class="detail-value placeholder">correo@ejemplo.com</span>
+            </div>
+          </div>
+
+          <div class="detail-group">
+            <p class="detail-heading">Datos para pagos</p>
+            <div class="detail-row">
+              <span class="detail-label">Banco</span>
+              <span class="detail-value placeholder">Banco por confirmar</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Titular</span>
+              <span class="detail-value placeholder">Nombre del titular</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">CLABE</span>
+              <span class="detail-value placeholder">000 000 000 000 000 000</span>
+            </div>
+          </div>
         </div>
 
         <div class="actions">
@@ -408,7 +442,7 @@
           </button>
         </div>
 
-        <p class="microcopy">Demo visual · Información final sujeta a aprobación.</p>
+        <p class="microcopy">Demo visual · Los datos mostrados son ejemplos y serán reemplazados al aprobar la tarjeta.</p>
       </section>
     </article>
 
