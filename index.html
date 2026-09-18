@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2b080f">
+  <meta name="description" content="Concepto de tarjeta digital para Cherry, creadora de contenido lifestyle y model.">
+  <title>Cherry — Tarjeta digital</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232b080f'/%3E%3Ccircle cx='24' cy='36' r='12' fill='%23b70f35'/%3E%3Ccircle cx='42' cy='36' r='12' fill='%23d92c55'/%3E%3Cpath d='M24 24c5-10 14-13 23-10' fill='none' stroke='%23f4e9df' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --wine: #2b080f;
+      --cherry: #b70f35;
+      --cherry-bright: #d92c55;
+      --cream: #f4e9df;
+      --paper: #fff9f5;
+      --ink: #24171a;
+      --muted: #78666a;
+      --line: rgba(43, 8, 15, .14);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--wine); -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 50% 8%, rgba(217, 44, 85, .25), transparent 34rem),
+        var(--wine);
+      font-family: var(--sans);
+      padding: 18px 12px 28px;
+    }
+
+    a, button { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+
+    .shell {
+      width: min(100%, 430px);
+      margin: 0 auto;
+      animation: rise .55s ease-out both;
+    }
+
+    .topline {
+      margin: 0 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: rgba(244, 233, 223, .78);
+      font-size: .76rem;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .topline-fruit {
+      font-size: 1.05rem;
+      letter-spacing: 0;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .22));
+    }
+
+    .card {
+      overflow: hidden;
+      background: var(--paper);
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 28px;
+      box-shadow: 0 28px 75px rgba(0, 0, 0, .36);
+    }
+
+    .portrait {
+      position: relative;
+      height: clamp(365px, 59vh, 515px);
+      min-height: 365px;
+      background: #140e10;
+      overflow: hidden;
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 28%;
+      display: block;
+      filter: saturate(.92) contrast(1.03);
+      transform: scale(1.01);
+    }
+
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(20, 5, 9, .06) 38%, rgba(29, 5, 11, .9) 100%);
+      pointer-events: none;
+    }
+
+    .monogram {
+      position: absolute;
+      z-index: 2;
+      top: 18px;
+      left: 20px;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      color: var(--cream);
+      border: 1px solid rgba(255, 255, 255, .52);
+      border-radius: 50%;
+      font-size: 1.25rem;
+      line-height: 1;
+      backdrop-filter: blur(8px);
+      background: rgba(43, 8, 15, .23);
+    }
+
+    .identity {
+      position: absolute;
+      z-index: 2;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      color: #fff;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: rgba(255, 255, 255, .72);
+      font-size: .77rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(3.4rem, 17vw, 5rem);
+      font-weight: 400;
+      letter-spacing: -.06em;
+      line-height: .88;
+    }
+
+    .roles {
+      margin: 14px 0 0;
+      font-size: .92rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, .86);
+    }
+
+    .content { padding: 24px; }
+
+    .intro {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 1.38rem;
+      line-height: 1.35;
+      letter-spacing: -.018em;
+    }
+
+    .handle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 20px;
+      padding: 15px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat {
+      min-width: 0;
+      text-align: center;
+    }
+
+    .stat + .stat { border-left: 1px solid var(--line); }
+
+    .stat strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.28rem;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .68rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .verified {
+      width: 16px;
+      height: 16px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: #1687ef;
+      font-size: .68rem;
+      font-weight: 800;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .action {
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 0 17px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      color: var(--ink);
+      background: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .action:hover {
+      transform: translateY(-1px);
+      border-color: rgba(183, 15, 53, .42);
+      background: #fffdfb;
+    }
+
+    .action.primary {
+      color: #fff;
+      background: var(--cherry);
+      border-color: var(--cherry);
+    }
+
+    .action.primary:hover { background: #a00d2e; }
+
+    .action svg {
+      width: 21px;
+      height: 21px;
+      flex: 0 0 auto;
+      stroke-width: 1.8;
+    }
+
+    .action-copy {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 2px;
+      text-align: left;
+    }
+
+    .action-label {
+      font-size: .98rem;
+      font-weight: 700;
+    }
+
+    .action-detail {
+      color: var(--muted);
+      font-size: .76rem;
+    }
+
+    .primary .action-detail { color: rgba(255, 255, 255, .72); }
+    .arrow { font-size: 1.15rem; opacity: .68; }
+
+    .microcopy {
+      margin: 18px 4px 0;
+      color: var(--muted);
+      font-size: .76rem;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    .credit {
+      margin: 15px 0 0;
+      color: rgba(244, 233, 223, .62);
+      font-size: .7rem;
+      letter-spacing: .09em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .credit a { color: inherit; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      z-index: 10;
+      max-width: calc(100vw - 32px);
+      padding: 11px 16px;
+      color: #fff;
+      background: #161012;
+      border-radius: 999px;
+      box-shadow: 0 12px 34px rgba(0, 0, 0, .24);
+      font-size: .84rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 12px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (min-width: 720px) {
+      body { padding-top: 34px; }
+      .card { border-radius: 32px; }
+      .content { padding: 27px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topline">
+      <span>Cherry · Digital card</span>
+      <span class="topline-fruit" aria-hidden="true">🍒</span>
+    </div>
+
+    <article class="card">
+      <section class="portrait" aria-label="Presentación de Cherry">
+        <img src="cherry-portrait.jpg" alt="Retrato de Cherry">
+        <div class="monogram" aria-hidden="true">🍒</div>
+        <div class="identity">
+          <p class="eyebrow">Creadora digital · México</p>
+          <h1>Cherry</h1>
+          <p class="roles">Creadora de contenido · Lifestyle · Model</p>
+        </div>
+      </section>
+
+      <section class="content">
+        <p class="intro">Lifestyle, autenticidad y una comunidad que conecta con su estilo.</p>
+        <div class="handle">
+          <span>@cherryvenegass</span>
+          <span class="verified" aria-label="Cuenta verificada">✓</span>
+        </div>
+
+        <div class="stats" aria-label="Perfil">
+          <div class="stat"><strong>80K+</strong><span>Comunidad</span></div>
+          <div class="stat"><strong>MX</strong><span>Origen</span></div>
+          <div class="stat"><strong>21</strong><span>Edad</span></div>
+        </div>
+
+        <div class="actions">
+          <a class="action primary" href="https://www.instagram.com/cherryvenegass/" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.4" cy="6.7" r=".8" fill="currentColor" stroke="none"></circle>
+            </svg>
+            <span class="action-copy">
+              <span class="action-label">Instagram</span>
+              <span class="action-detail">Ver contenido y conectar</span>
+            </span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <button class="action" type="button" id="save-contact">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3v12"></path>
+              <path d="m7 10 5 5 5-5"></path>
+              <path d="M5 21h14"></path>
+            </svg>
+            <span class="action-copy">
+              <span class="action-label">Guardar perfil</span>
+              <span class="action-detail">Contacto digital en tu teléfono</span>
+            </span>
+            <span class="arrow" aria-hidden="true">↓</span>
+          </button>
+
+          <button class="action" type="button" id="share-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <path d="m8.6 10.5 6.8-4"></path>
+              <path d="m8.6 13.5 6.8 4"></path>
+            </svg>
+            <span class="action-copy">
+              <span class="action-label">Compartir tarjeta</span>
+              <span class="action-detail">Enlace listo para enviar</span>
+            </span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </button>
+        </div>
+
+        <p class="microcopy">Demo visual · Información final sujeta a aprobación.</p>
+      </section>
+    </article>
+
+    <p class="credit"><a href="https://www.eurekawebsites.tech/" target="_blank" rel="noopener noreferrer">Powered by Eureka Tech</a></p>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const toast = document.getElementById('toast');
+    let toastTimer;
+
+    function notify(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    document.getElementById('save-contact').addEventListener('click', () => {
+      const vcard = [
+        'BEGIN:VCARD',
+        'VERSION:3.0',
+        'FN:Cherry',
+        'N:;Cherry;;;',
+        'TITLE:Creadora de contenido · Lifestyle · Model',
+        'URL:https://www.instagram.com/cherryvenegass/',
+        'X-SOCIALPROFILE;TYPE=instagram:https://www.instagram.com/cherryvenegass/',
+        'NOTE:Perfil público de Instagram: @cherryvenegass',
+        'END:VCARD'
+      ].join('\r\n');
+
+      const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Cherry-Instagram.vcf';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      notify('Perfil listo para guardar');
+    });
+
+    document.getElementById('share-card').addEventListener('click', async () => {
+      const data = {
+        title: 'Cherry — Tarjeta digital',
+        text: 'Conoce el perfil de Cherry',
+        url: window.location.href
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(data);
+        } else {
+          await navigator.clipboard.writeText(window.location.href);
+          notify('Enlace copiado');
+        }
+      } catch (error) {
+        if (error && error.name !== 'AbortError') notify('No fue posible compartir');
+      }
+    });
+  </script>
+</body>
+</html>
