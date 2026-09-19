@@ -292,9 +292,13 @@
     }
 
     .email-value {
-      font-size: .88rem;
-      letter-spacing: -.025em;
-      white-space: nowrap;
+      min-width: 0;
+      max-width: 100%;
+      font-size: .84rem;
+      letter-spacing: -.03em;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .contact-copy {
@@ -468,6 +472,20 @@
     @keyframes rise {
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 390px) {
+      .content { padding: 22px 18px; }
+
+      .contact-card {
+        grid-template-columns: 38px minmax(0, 1fr);
+        gap: 12px;
+        padding: 14px 15px;
+      }
+
+      .email-value {
+        font-size: .82rem;
+      }
     }
 
     @media (min-width: 720px) {
