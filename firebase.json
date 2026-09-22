@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "cherry-digital-card",
     "public": ".",
     "ignore": [
       "firebase.json",
